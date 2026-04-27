@@ -4,10 +4,23 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
+    """
+    Модель пользователя
+    """
     pass
 
 
 class Project(models.Model):
+    """
+    Модель проекта
+    Объединяет задачи и участников
+     - name: название проекта
+     - description: описание проекта
+     - creator: создатель проекта
+     - members: участники проекта
+     - created_at: дата создания проекта
+     - tasks: задачи проекта
+    """
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
@@ -24,21 +37,26 @@ class Project(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
+        """Строковое представление проекта"""
         return self.name
     
 
 class Task(models.Model):
+    """Модель задачи"""
 
     # status = models.CharField(max_length=50)
     # priority = models.CharField(max_length=50)
     class Status(models.TextChoices):
+        """Статусы задачи"""
         TODO = 'Сделать', 'сделать'
         IN_PROGRESS = 'В процессе', 'в процессе'
         DONE = 'Готово', 'готово'
 
 
     class Priority(models.TextChoices):
+        """Приоритеты задачи"""
         LOW = 'Низкий', 'низкий'
         MEDIUM = 'Средний', 'средний'
         HIGH = 'Высокий', 'высокий'
@@ -80,5 +98,7 @@ class Task(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
+        """Строковое представление задачи"""
         return self.title
