@@ -7,8 +7,10 @@ from tasks.permissions import ProjectPermission, TaskPermission
 from .models import Project, Task
 from .serializers import ProjectSerializer, TaskSerializer, RegisterSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
 
 
+@extend_schema(request=RegisterSerializer)
 class RegisterView(APIView):
     """
     Предоставляет операцию регистрации пользователя
